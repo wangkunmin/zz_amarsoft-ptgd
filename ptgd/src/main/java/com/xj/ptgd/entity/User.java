@@ -1,5 +1,10 @@
 package com.xj.ptgd.entity;
 
+ /**
+  * User 
+  * @author wkm
+  * @since 2018/7/30
+  */
 public class User extends BaseDto{
     private Integer userId;
     private String userName;

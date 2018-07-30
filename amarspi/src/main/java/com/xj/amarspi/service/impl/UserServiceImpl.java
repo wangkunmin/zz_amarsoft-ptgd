@@ -1,5 +1,7 @@
 package com.xj.amarspi.service.impl;
 
+import com.xj.amarspi.common.exception.DataNullException;
+import com.xj.amarspi.common.result.ResultEnum;
 import com.xj.amarspi.dao.UserDao;
 import com.xj.amarspi.entity.User;
 import com.xj.amarspi.service.UserService;
@@ -19,8 +21,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Integer userId) {
-        return userDao.findUserForId(userId);
+    public User findUserById(Integer userId){
+        User user = userDao.findUserForId(userId);
+        if(user == null){ //数据为空处理
+            throw new DataNullException(ResultEnum.DATA_NULL);
+        }else{
+            return user;
+        }
     }
 
 }

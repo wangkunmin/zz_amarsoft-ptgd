@@ -1,6 +1,7 @@
 package com.xj.amarspi.controller;
 
-import com.xj.amarspi.entity.User;
+import com.xj.amarspi.common.result.Result;
+import com.xj.amarspi.common.result.ResultUtil;
 import com.xj.amarspi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +18,15 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/userId", method = RequestMethod.GET)
-    public User findByUserId(@RequestParam(value = "userId", required = true) int userId) {
+    public Result findByUserId(@RequestParam(value = "userId", required = true) int userId) {
         System.out.println("开始查询...");
-        return userService.findUserById(userId);
+        return ResultUtil.success(userService.findUserById(userId));
     }
 
     @RequestMapping(value = "/userAll", method = RequestMethod.GET)
-    public List<User> findUsers() {
+    public Result findUsers() {
         System.out.println("开始查询...");
-        return userService.findUsers();
+        return ResultUtil.success(userService.findUsers()) ;
     }
 
 
