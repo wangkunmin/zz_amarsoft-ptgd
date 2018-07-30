@@ -1,5 +1,7 @@
 package com.xj.ptgd.service.impl;
 
+import com.xj.ptgd.common.exception.CustomException;
+import com.xj.ptgd.common.result.ResultEnum;
 import com.xj.ptgd.dao.UserDao;
 import com.xj.ptgd.entity.User;
 import com.xj.ptgd.service.UserService;
@@ -26,7 +28,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Integer userId) {
-        return userDao.findUserForId(userId);
+        User user = userDao.findUserForId(userId);
+        if(user == null){
+            throw new CustomException(ResultEnum.DATA_NULL);
+        }else{
+            return user;
+        }
     }
 
 }

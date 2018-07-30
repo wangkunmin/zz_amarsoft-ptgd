@@ -1,5 +1,7 @@
 package com.xj.ptgd.controller;
 
+import com.xj.ptgd.common.result.Result;
+import com.xj.ptgd.common.result.ResultUtil;
 import com.xj.ptgd.entity.User;
 import com.xj.ptgd.service.UserService;
 import com.xj.ptgd.xmlEntity.UserXML;
@@ -15,10 +17,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/userId", method = RequestMethod.GET)
-    public User findByUserId(@RequestParam(value = "userId", required = true) int userId) {
+    @RequestMapping(value = "/userId", method = RequestMethod.GET ,produces = { "application/xml;charset=UTF-8" })
+    public Result findByUserId(@RequestParam(value = "userId", required = true) int userId) {
         System.out.println("开始查询...");
-        return userService.findUserById(userId);
+        return ResultUtil.success(userService.findUserById(userId));
     }
 
     @RequestMapping(value = "/userAll", method = RequestMethod.GET)
@@ -29,9 +31,10 @@ public class UserController {
 
     @RequestMapping(value = "/getUserInfo", produces = { "application/xml;charset=UTF-8" })
     @ResponseBody
-    public List<UserXML> getUserBaseInfo(HttpServletRequest request) {
+    public Result getUserBaseInfo(HttpServletRequest request) {
         System.out.println("开始查询...");
-        return userService.findUsersXML();
+
+        return ResultUtil.success(userService.findUsersXML());
     }
 
 }

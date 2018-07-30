@@ -7,7 +7,7 @@
             USER_NAME userName
         FROM GTD_USER
     </select>
-    <select id="findUserForId" parameterType="User">
+    <select id="findUserForId" parameterType="java.lang.Integer" resultType="User">
         SELECT
             USER_ID userId,
             USER_NAME userName
